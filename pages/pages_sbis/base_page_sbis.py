@@ -8,3 +8,6 @@ class BasePageSBIS(BasePage):
     def go_to_contacts_page(self):
         contacts = self.browser.find_element(*BaseLocatorsSBIS.CONTACTS_LINK)
         contacts.click()
+
+    def go_download_page(self):
+        download_in_footer = self.browser.find_element()

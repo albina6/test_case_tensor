@@ -4,7 +4,6 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-import time
 class ContactsPageSBIS(BasePageSBIS):
     def go_to_tensor(self):
         tensor_logo = self.browser.find_element(*ContactsLocatorsSBIS.TENSOR_LOGO)

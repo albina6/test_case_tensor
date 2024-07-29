@@ -16,3 +16,7 @@ class BasePage():
         except NoSuchElementException:
             return False
         return True
+
+    def check_current_url_equal_enter_url(self, enter_url):
+        current_url = self.browser.current_url
+        assert current_url == enter_url, f"Current url {current_url} != enter_url{enter_url}"
