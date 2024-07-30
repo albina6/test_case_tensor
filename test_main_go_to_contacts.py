@@ -16,7 +16,18 @@ class TestSBISGoToContact:
         yield page
 
     def test_sbis_tensor_equal_size_imgs(self, base_page):
-        #        This is First Script (question)
+        '''
+        This is First Script (question)
+
+        1) Перейти на https://sbis.ru/ в раздел "Контакты"
+        2) Найти баннер Тензор, кликнуть по нему
+        3) Перейти на https://tensor.ru/
+        4) Проверить, что есть блок "Сила в людях"
+        5) Перейдите в этом блоке в "Подробнее" и убедитесь, что открывается https://tensor.ru/about
+        6) Находим раздел Работаем и проверяем, что у всех фотографии хронологии одинаковые
+            высота (height) и ширина (width)
+        '''
+
         enter_url = "https://tensor.ru/about"
 
         base_page.go_to_contacts_page()
@@ -34,7 +45,15 @@ class TestSBISGoToContact:
 
 
     def test_sbis_contact_change_region(self, base_page):
-        #        This Second Script (question)
+        '''
+        This Second Script (question)
+
+        1) Перейти на https://sbis.ru/ в раздел "Контакты"
+        2) Проверить, что определился ваш регион (в нашем примере Ярославская обл.) и есть список партнеров.
+        3) Изменить регион на Камчатский край
+        4) Проверить, что подставился выбранный регион, список партнеров изменился,
+            url и title содержат информацию выбранного региона
+        '''
 
         region_current = "Республика Башкортостан"
         country_current = "Уфа"
