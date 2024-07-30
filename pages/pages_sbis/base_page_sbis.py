@@ -10,4 +10,6 @@ class BasePageSBIS(BasePage):
         contacts.click()
 
     def go_download_page(self):
-        download_in_footer = self.browser.find_element()
+        download_in_footer = self.browser.find_element(*BaseLocatorsSBIS.FOOTER_DOWNLOAD_LINK)
+        self.click_element(download_in_footer)
+        # download_in_footer.click()

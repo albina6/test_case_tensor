@@ -55,4 +55,3 @@ class TestSBISGoToContact:
         contacts_page.should_be_enter_region_in_title(region_final)
         contacts_page.should_be_equal_enter_region_country(region_final, country_final)
 
-

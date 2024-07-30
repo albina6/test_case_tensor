@@ -21,7 +21,4 @@ class MainPageTensor(BasePageTensor):
     def go_to_details_in_cadre_power(self):
         card_power = self.cadre_power_in_people()
         more_card_power = card_power.find_element(*MainLocatorsTensor.REF_IN_CARDS)
-        self.browser.execute_script("return arguments[0].scrollIntoView(true);", more_card_power)
-        more_card_power.click()
-
-
+        self.click_element(more_card_power)
