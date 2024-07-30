@@ -5,22 +5,25 @@ from .pages.pages_sbis.contacts_page_sbis import ContactsPageSBIS
 from .pages.pages_tensor.main_page_tensor import MainPageTensor
 from .pages.pages_tensor.about_page import AboutPageTensor
 
-import time
-
 
 class TestSBISGoToContact:
-    def test_sbis_tensor_equal_size_imgs(self, browser):
-        #        This is First Script (question)
+    @pytest.fixture()
+    def base_page(self, browser):
         link = 'https://sbis.ru/'
-        enter_url = "https://tensor.ru/about"
 
         page = BasePageSBIS(browser, link)
         page.open()
-        page.go_to_contacts_page()
-        contacts_page = ContactsPageSBIS(page.browser, page.browser.current_url)
+        yield page
+
+    def test_sbis_tensor_equal_size_imgs(self, base_page):
+        #        This is First Script (question)
+        enter_url = "https://tensor.ru/about"
+
+        base_page.go_to_contacts_page()
+        contacts_page = ContactsPageSBIS(base_page.browser, base_page.browser.current_url)
         contacts_page.go_to_tensor()
 
-        browser.switch_to.window(browser.window_handles[1])
+        contacts_page.browser.switch_to.window(contacts_page.browser.window_handles[1])
         main_page_tensor = MainPageTensor(contacts_page.browser, contacts_page.browser.current_url)
         main_page_tensor.should_be_present_cadre_power_in_people()
         main_page_tensor.go_to_details_in_cadre_power()
@@ -30,7 +33,7 @@ class TestSBISGoToContact:
         about_page.should_be_equal_size_img_in_works_block()
 
 
-    def test_sbis_contact_change_region(self, browser):
+    def test_sbis_contact_change_region(self, base_page):
         #        This Second Script (question)
 
         region_current = "Республика Башкортостан"
@@ -42,12 +45,9 @@ class TestSBISGoToContact:
         region_final = "Камчатский край"
         country_final = "Петропавловск-Камчатский"
         part_url_final = "kamchatskij-kraj"
-        link = 'https://sbis.ru/'
 
-        page = BasePageSBIS(browser, link)
-        page.open()
-        page.go_to_contacts_page()
-        contacts_page = ContactsPageSBIS(page.browser, page.browser.current_url)
+        base_page.go_to_contacts_page()
+        contacts_page = ContactsPageSBIS(base_page.browser, base_page.browser.current_url)
         contacts_page.should_be_equal_enter_region_country(region_current, country_current)
         contacts_page.change_to_enter_region_in_dialog(region_final)
 

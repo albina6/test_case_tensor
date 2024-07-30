@@ -7,9 +7,8 @@ from .locators_sbis import DownloadLocatorsSBIS
 
 __FILE_NAME_WEB_PLUGIN = "web_plugin_windows"
 class DownloadPageSBIS(BasePageSBIS):
-    def download_file(self, a_web_elem):
+    def download_file(self, a_web_elem, file_name):
         file_url = a_web_elem.get_attribute("href")
-        file_name = "file_for_check.exe"
         # file_name = file_url.rsplit("/", maxsplit=1)[1]
         file_size_in_web = self.size_file_in_text_ref(a_web_elem.text)
 
@@ -24,9 +23,9 @@ class DownloadPageSBIS(BasePageSBIS):
         assert difference < 0.05, \
             f"The difference between the expected and actual file size is more than acceptable {difference}"
 
-    def download_plugin_web_setup(self):
+    def download_plugin_web_setup(self, file_name):
         ref_download = self.browser.find_element(*DownloadLocatorsSBIS.DOWNLOAD_WEB_SETUP)
-        self.download_file(ref_download)
+        self.download_file(ref_download, file_name)
 
 
 

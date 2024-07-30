@@ -10,6 +10,6 @@ class AboutPageTensor(BasePageTensor):
         width_img = img_list_works_block[0].get_attribute("width")
         height_img = img_list_works_block[0].get_attribute("height")
 
-        for ind, img in enumerate(img_list_works_block[1:], 2):
-            assert width_img == img.get_attribute("width"), f"Width img_{ind} not equal width img_0"
-            assert height_img == img.get_attribute("height"), f"Height img_{ind} not equal height img_0"
+        for index, img in enumerate(img_list_works_block[1:], 2):
+            assert width_img == img.get_attribute("width"), f"Width img_{index} not equal width img_0"
+            assert height_img == img.get_attribute("height"), f"Height img_{index} not equal height img_0"

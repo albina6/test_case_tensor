@@ -13,15 +13,28 @@ class ContactsPageSBIS(BasePageSBIS):
         self.should_be_equal_check_region(enter_region)
         self.should_be_equal_check_country_region(enter_country)
 
-    def should_be_equal_check_region(self, enter_region):
-        region = self.browser.find_element(*ContactsLocatorsSBIS.CONTAINER_REGION)
-        assert region.text == enter_region,\
-            f"Region in page don't equal enter region\n {region.text} != {enter_region}"
+    def should_be_equal_check_region(self, enter_region, timeout=5):
+        # for DRY (EC found_element)
+        region_select = ContactsLocatorsSBIS.CONTAINER_REGION
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.text_to_be_present_in_element(
+                region_select, enter_region))
+        except TimeoutException:
+            region = self.browser.find_element(*region_select)
+            assert region.text == enter_region, \
+                f"Region in page don't equal enter region\n {region.text} != {enter_region}"
+        
 
-    def should_be_equal_check_country_region(self, enter_country):
-        country = self.browser.find_element(*ContactsLocatorsSBIS.COUNTRY_FROM_REGION)
-        assert country.text == enter_country, \
-            f"Country in page don't equal enter country\n {country.text} != {enter_country}"
+
+    def should_be_equal_check_country_region(self, enter_country, timeout=5):
+        country_selector = ContactsLocatorsSBIS.COUNTRY_FROM_REGION
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.text_to_be_present_in_element(
+                country_selector, enter_country))
+        except TimeoutException:
+            country = self.browser.find_element(*country_selector)
+            assert country.text == enter_country, \
+                f"Country in page don't equal enter country\n {country.text} != {enter_country}"
 
     def should_be_enter_region_in_url(self, enter_region_url, timeout=5):
         try:
@@ -40,11 +53,6 @@ class ContactsPageSBIS(BasePageSBIS):
         '''
         In this function we use title ul.li elements, BUT
         visible text can be not equal this title( and text in top container and browser.title.)
-
-        If you need check top container and browser.title after this function first use
-        should_be_enter_region_in_title() or should_be_enter_region_in_url()
-        this function use WebDriverWait
-        and after should_be_equal_enter_region_country()
         '''
         region = self.browser.find_element(*ContactsLocatorsSBIS.CONTAINER_REGION)
         region.click()
