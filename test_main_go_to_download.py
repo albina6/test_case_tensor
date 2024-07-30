@@ -22,6 +22,7 @@ class TestSBISGoToDownload:
             pass
 
     def test_download_plugin_for_windows(self, base_page):
+        #        This Third Script (question)
         base_page.go_download_page()
 
         download_page = DownloadPageSBIS(base_page.browser, base_page.browser.current_url)

@@ -9,7 +9,6 @@ __FILE_NAME_WEB_PLUGIN = "web_plugin_windows"
 class DownloadPageSBIS(BasePageSBIS):
     def download_file(self, a_web_elem, file_name):
         file_url = a_web_elem.get_attribute("href")
-        # file_name = file_url.rsplit("/", maxsplit=1)[1]
         file_size_in_web = self.size_file_in_text_ref(a_web_elem.text)
 
         response = requests.get(file_url)
